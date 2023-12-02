@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <title>Pathfinder Sandbox</title>
+    <meta name="viewport" content="width=device.width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="main.js"></script>
+    <script src="data_handling.js"></script>
+    <script src="Tile.js"></script>
+    <script src="Intersection.js"></script>
+    <script src="breadth-first-search.js"></script>
+    <script src="depth-first-search.js"></script>
+    <script src="presets.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <body>
+        <div>
+            <h1 id="title">Pathfinder Sandbox</h1>   
+            <p><a href="https://github.com/IvanoMaker/Pathfinder-Sandbox.git">Github</a></p>
+            <input type="file" id="maze_source" accept=".txt" class="file"/>
+            <button onclick="document.getElementById('maze_source').files.length == 0 ? read_preset(current_ps) : read_maze()">Load/Reload</button>
+            <label for="cell_size_input">Cell Size</label>
+            <input type="number" id="cell_size_input" class="txt"/>
+            <label for="ts">Time Step (ms)</label>
+            <input type="number" id="ts" class="txt" value="100"/>
+            <button onclick="solve_setup()">Run</button>
+            <button onclick="stop = true; clearInterval(loop); loop = 1; selected_alg = null;">Stop</button>
+            <br>
+            <label for="algorithm">Algorithm</label>
+            <select name="algorithm" id="algorithm">
+                <option value="bfs">Breadth-First Search</option>
+                <option value="dfs">Depth-First Search</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <table>
+                <td>
+                    <canvas id="maze"></canvas>
+                </td>
+                <td>
+                    <h2 id="steps"></h2>
+                    <h2 id="tiles"></h2>
+                    <h2 id="path_len"></h2>
+                </td>
+            </table>
+        </div>
+        <div>
+            <table id="bottom_row">
+                <td>
+                <table id="presets">
+                    <tr>
+                        <td id="ps" colspan="2">Preset Mazes</td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(thirty_two)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            32x32 maze
+                        </td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(sixty_four)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            64x64 maze
+                        </td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(hundred_twenty_eight)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            128x128 maze
+                        </td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(two_fifty_six)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            256x256 maze
+                        </td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(sisyphus)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            maze with no solution
+                        </td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(sixteen_blank)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            blank 16x16 maze
+                        </td id="ps">
+                    </tr>
+                    <tr>
+                        <td id="ps">
+                            <button onclick="read_preset(one_hall)">Load</button>
+                        </td id="ps">
+                        <td id="ps">
+                            64x64 one hallway expansion test
+                        </td id="ps">
+                    </tr>
+                </table>
+                </td>
+                <td>
+                    <h4>Options</h4>
+                    <input type="checkbox" id="highlight" checked>
+                    <label for="highlight">Highlight Current Tile</label> <br>
+                    <input type="checkbox" id="animate" checked>
+                    <label for="animate">Do Animation</label>
+                    <input type="checkbox" id="just_draw_red" checked>
+                    <label for="just_draw_red">Only Draw Red</label>
+                </td>
+            </table>
+        </div>
+    </body>
+</html>

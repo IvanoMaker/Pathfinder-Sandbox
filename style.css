@@ -1,0 +1,33 @@
+input.txt {
+    width: 50px;
+}
+
+label, input.file, select {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: medium;
+}
+
+body {
+    background-color: rgb(215, 215, 215);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+td {
+    vertical-align: top;
+}
+
+h2#path_len {
+    color: #ba1611;
+}
+
+h1#title {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+table#presets {
+    border:1px solid black;
+}
+
+td#ps {
+    border:1px solid black;
+}
