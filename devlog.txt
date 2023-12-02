@@ -1,0 +1,33 @@
+- Standard Version -
+
+the standard version is the version of update_field that redraws the entire field.
+this includes pieces which will never change, such as walls.
+
+this was the way the drawing loop worked.
+
+    for (let n = 0; n < field.length; n++) {
+            for (let m = 0; m < field[n].length; m++) {
+                if (field[n][m].tick(field) == 1) {
+                    updated.push([n, m]);
+                }
+            }
+        }
+
+running the 256x256 maze with cell size 2 and no additional time buffer took around 
+43903.977294921875 ms or ~43.903 seconds to solve.
+
+- Valid-Tile Version -
+
+this version adds the valid_tiles array, which stores all the tiles which could change, as well as the start and end.
+this prevents the draw loop from drawing tiles it never needs to, or looping unnecesarily.
+
+the previous code in update_field was replaced with this.
+
+    for (let n = 0; n < valid_tiles.length; n++) {
+        if (field[valid_tiles[n][0]][valid_tiles[n][1]].tick(field) == 1) {
+            updated.push([valid_tiles[n][0], valid_tiles[n][1]]);
+        }
+    }
+
+running the 256x256 maze with cell size 2 and no additional time buffer took around
+timer: 24670.54296875 ms or ~24.67 seconds to solve.

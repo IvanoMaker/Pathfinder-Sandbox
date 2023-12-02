@@ -1,0 +1,26 @@
+function bfs_solve() {
+    if (hault == false) {
+        if (backtrack(end).length == 0)   {
+            temp = update_field(field, context, tree, end);
+            if (temp > 0) {
+                tiles += temp;
+            } else {
+                hault = true;
+                console.timeEnd("timer");
+                timing = false;
+                document.getElementById("path_len").innerHTML = "No Path Exists";
+            } 
+            steps++;
+
+            document.getElementById("steps").innerHTML = "Steps: " + String(steps);
+            document.getElementById("tiles").innerHTML = "Tiles Passed: " + tiles;
+        } else {
+            len = backtrack(end)[0].length;
+            document.getElementById("path_len").innerHTML = "Path Length: " + len;
+            if (timing) {
+                console.timeEnd("timer");
+                timing = false;
+            }            
+        }
+    }
+}
