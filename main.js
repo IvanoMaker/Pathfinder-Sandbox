@@ -31,6 +31,24 @@ function update_field(field, screen, tree, end) {
     return updates;
 }
 
+function surrounding(tile) {
+    var pos = tile.pos;
+    var array = [];
+    if (field[pos[0]][pos[1]-1] != null) {
+        array.push([pos[0], pos[1] - 1]);
+    }
+    if (field[pos[0]][pos[1]+1] != null) {
+        array.push([pos[0], pos[1] + 1]);
+    }
+    if (field[pos[0]-1][0] != null) {
+        array.push([pos[0] - 1, pos[1]]);
+    }
+    if (field[pos[0]+1][0] != null) {
+        array.push([pos[0] + 1, pos[1]]);
+    }
+    return array;
+}
+
 function solve_setup() {
     steps = 0;
     tiles = 0;
@@ -50,6 +68,16 @@ function solve_setup() {
             document.getElementById("tiles").innerHTML = "";
             selected_alg = "dfs";
             depth_first_search();
+        } else if (document.getElementById("algorithm").value == "pbfs") {
+            document.getElementById("path_len").innerHTML = "";
+            document.getElementById("tiles").innerHTML = "";
+            selected_alg = "pbfs";
+            priority_breadth_first_search();
+        } else if (document.getElementById("algorithm").value == "pdfs") {
+            document.getElementById("path_len").innerHTML = "";
+            document.getElementById("tiles").innerHTML = "";
+            selected_alg = "pdfs";
+            priority_depth_first_search();
         }
     }
 }
@@ -65,7 +93,7 @@ var step = 100;
 var field = [];
 var valid_tiles = [];
 var tree = [];
-var roadmap = [];
 var loop = 1;
 var canvas, context;
 var start, end;
+var road_begining;
