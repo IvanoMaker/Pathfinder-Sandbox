@@ -1,3 +1,10 @@
+/*
+DATA HANDLING . JS
+This file primarily deals with processing maze data and updating the field in the program accordingly
+read_maze() deals with importing text files to read as mazes.
+load_maze() processes maze data into the program, it also serves to reset the maze when needed.
+read_preset() reads in a preset maze based on HTML selections (see presets.js if you so desire).
+*/
 function read_maze() {
     const file_source = document.getElementById("maze_source");
     const file = file_source.files[0];
@@ -42,10 +49,8 @@ function load_maze() {
 
             if (field_data[j].charAt(i) == 1) {
                 start = field[i][j];
-                roadmap.push(new Intersection(i, j, "start"));
             } else if (field_data[j].charAt(i) == 3) {
                 end = field[i][j];
-                roadmap.push(new Intersection(i, j, "end"));
             }
 
             if (field_data[j].charAt(i) != 2) {
